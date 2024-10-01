@@ -1,0 +1,29 @@
+name: Android Build APK
+ 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v2
+ 
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+ 
+    - name: Set up Android SDK
+      uses: android-actions/sdk-manager@v1
+      with:
+        permissions: write
+ 
+    - name: Set up Gradle
+      uses: gradle/gradle-build-action@v1
+      with:
+        arguments: assembleRelease
